@@ -58,12 +58,11 @@ Keep the response below 250 words.
 
 #         return f"Error generating recommendation: {str(e)}"
 
-def get_ai_recommendation(disease, severity, confidence):
+def get_ai_recommendation(disease, severity):
 
     prompt = build_prompt(
         disease,
-        severity,
-        confidence
+        severity
     )
 
     try:
