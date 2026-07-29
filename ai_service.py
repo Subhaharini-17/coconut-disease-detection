@@ -1,4 +1,5 @@
 import os
+from recommendations import LOCAL_RECOMMENDATIONS
 from dotenv import load_dotenv
 from google import genai
 
@@ -40,14 +41,35 @@ Keep the response below 250 words.
 """
 
 
-def get_ai_recommendation(disease, severity):
+# def get_ai_recommendation(disease, severity):
 
-    prompt = build_prompt(disease, severity)
+#     prompt = build_prompt(disease, severity)
+
+#     try:
+
+#         response = client.models.generate_content(
+#             model="gemini-3.5-flash",
+#             contents=prompt
+#         )
+
+#         return response.text
+
+#     except Exception as e:
+
+#         return f"Error generating recommendation: {str(e)}"
+
+def get_ai_recommendation(disease, severity, confidence):
+
+    prompt = build_prompt(
+        disease,
+        severity,
+        confidence
+    )
 
     try:
 
         response = client.models.generate_content(
-            model="gemini-3.5-flash",
+            model="gemini-2.0-flash",
             contents=prompt
         )
 
@@ -55,4 +77,17 @@ def get_ai_recommendation(disease, severity):
 
     except Exception as e:
 
-        return f"Error generating recommendation: {str(e)}"
+        print("Gemini Error:", e)
+
+        # Fallback
+        if disease in LOCAL_RECOMMENDATIONS:
+
+            return (
+                "⚠️ **AI service is currently unavailable.**\n\n"
+                "Showing expert recommendations stored locally.\n\n"
+                + LOCAL_RECOMMENDATIONS[disease]["recommendation"]
+            )
+
+        return (
+            "AI recommendation unavailable and no local recommendation exists."
+        )
