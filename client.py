@@ -51,7 +51,7 @@ if uploaded_file:
             with st.spinner("Running disease detection..."):
 
                 response = requests.post(
-                    "http://127.0.0.1:8000/predict",
+                    "https://coconut-disease-detection-1.onrender.com/predict",
                     files=files
                 )
 
@@ -103,7 +103,7 @@ if uploaded_file:
             with st.spinner("Generating AI recommendation..."):
 
                 ai_response = requests.post(
-                    "http://127.0.0.1:8000/recommend",
+                    "https://coconut-disease-detection-1.onrender.com/recommend",
                     json={
                         "disease": disease,
                         "severity": severity
