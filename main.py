@@ -71,7 +71,12 @@ class RecommendationRequest(BaseModel):
 # ---------------------------------------------------------
 # Load model once at startup (not per-request)
 # ---------------------------------------------------------
+# model = tf.keras.models.load_model("coconut_model.keras")
+print("Loading coconut disease model...", flush=True)
+
 model = tf.keras.models.load_model("coconut_model.keras")
+
+print("Coconut disease model loaded successfully!", flush=True)
 
 class_names = [
     'CCI_Caterpillars',
