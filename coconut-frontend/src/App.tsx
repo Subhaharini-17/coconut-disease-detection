@@ -469,7 +469,8 @@
 
 // export default App;
 
-import { useState } from "react";
+// import { useState } from "react";
+import { useState, type ReactElement } from "react";
 import "./App.css";
 
 interface PredictResult {
@@ -511,7 +512,8 @@ function renderInline(text: string) {
 
 function renderContent(content: string) {
   const lines = content.split("\n").map((l) => l.trim()).filter(Boolean);
-  const elements: JSX.Element[] = [];
+  // const elements: JSX.Element[] = [];
+  const elements: ReactElement[] = [];
   let currentList: string[] = [];
   let listType: "ul" | "ol" | null = null;
 
