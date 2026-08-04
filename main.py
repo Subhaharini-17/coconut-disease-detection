@@ -45,6 +45,7 @@
 
 from fastapi import FastAPI, File, UploadFile
 from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from ai_service import get_ai_recommendation
 
@@ -56,6 +57,14 @@ import io
 import base64
 
 app = FastAPI()
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 class RecommendationRequest(BaseModel):
     disease: str
     severity: str
