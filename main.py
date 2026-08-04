@@ -42,6 +42,7 @@
 #         "disease": class_names[pred_index],
 #         "confidence": round(confidence, 4)
 #     })
+print("Starting main.py...", flush=True)
 
 from fastapi import FastAPI, File, UploadFile
 from fastapi.responses import JSONResponse
@@ -49,7 +50,11 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from ai_service import get_ai_recommendation
 
+# import tensorflow as tf
+
 import tensorflow as tf
+
+print("TensorFlow imported successfully!", flush=True)
 import numpy as np
 import cv2
 from PIL import Image
