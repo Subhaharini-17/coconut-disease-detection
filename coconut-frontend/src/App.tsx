@@ -473,13 +473,14 @@
 import { useState, type ReactElement } from "react";
 import "./App.css";
 
+
 interface PredictResult {
   disease: string;
   confidence: number;
   severity: string;
   heatmap_image_base64: string;
 }
-
+const API_URL = "https://coconut-disease-detection-1.onrender.com";
 function parseSeverity(severity: string) {
   const percentMatch = severity.match(/(\d+(\.\d+)?)%/);
   if (percentMatch) {
@@ -585,7 +586,7 @@ function App() {
       const formData = new FormData();
       formData.append("file", selectedFile);
 
-      const predictRes = await fetch("https://coconut-disease-detection-1.onrender.com/predict", {
+      const predictRes = await fetch(`${API_URL}/predict`, {
         method: "POST",
         body: formData,
       });
@@ -593,7 +594,7 @@ function App() {
       const predictData: PredictResult = await predictRes.json();
       setResult(predictData);
 
-      const recommendRes = await fetch("https://coconut-disease-detection-1.onrender.com/recommend", {
+      const recommendRes = await fetch(`${API_URL}/recommend`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
