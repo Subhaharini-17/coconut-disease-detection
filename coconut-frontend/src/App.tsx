@@ -583,7 +583,7 @@ function App() {
       const formData = new FormData();
       formData.append("file", selectedFile);
 
-      const predictRes = await fetch("http://localhost:8000/predict", {
+      const predictRes = await fetch("https://coconut-disease-detection-1.onrender.com/predict", {
         method: "POST",
         body: formData,
       });
@@ -591,7 +591,7 @@ function App() {
       const predictData: PredictResult = await predictRes.json();
       setResult(predictData);
 
-      const recommendRes = await fetch("http://localhost:8000/recommend", {
+      const recommendRes = await fetch("https://coconut-disease-detection-1.onrender.com/recommend", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
